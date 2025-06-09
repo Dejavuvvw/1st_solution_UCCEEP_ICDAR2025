@@ -1,0 +1,23 @@
+# 通用忽略
+.DS_Store
+
+# Python
+__pycache__/
+*.egg-info/
+
+# VSCode
+.vscode/
+
+# 操作系统临时文件
+*.swp
+*.swo
+*.bak
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+infer_result_250328/
+model_acc894_250328/
+cep.tar
+convert2final_json.py
+testa_predict_tanyang_250328.jsonl
