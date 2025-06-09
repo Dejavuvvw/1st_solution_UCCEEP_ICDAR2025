@@ -1,5 +1,5 @@
 MODEL='YOUR MODEL'
-VAL_DATA='/app/TestA_promptNew.jsonl'
+VAL_DATA='TestA_promptNew.jsonl'
 CUDA_VISIBLE_DEVICES=0,1,2,3 \
 MAX_PIXELS=802816 \
 swift infer \

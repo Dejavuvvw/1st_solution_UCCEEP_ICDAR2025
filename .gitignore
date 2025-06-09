@@ -19,5 +19,4 @@ __pycache__/
 infer_result_250328/
 model_acc894_250328/
 cep.tar
-convert2final_json.py
 testa_predict_tanyang_250328.jsonl

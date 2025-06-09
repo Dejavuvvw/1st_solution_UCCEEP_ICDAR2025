@@ -19,14 +19,13 @@ Papers in ICDAR’25</h2>
 
 [![arXiv](https://img.shields.io/badge/arXiv-2502.17422-b31b1b.svg)]()
 [![ICDAR 2025](https://img.shields.io/badge/ICDAR-2025-green.svg)](https://note.kxsz.net/share/b0d4b929-232d-460d-9107-374a15d6767f)
-[![Huggingface](https://img.shields.io/badge/Huggingface-orange.svg)]()
+[![Huggingface](https://img.shields.io/badge/Huggingface-orange.svg)](https://huggingface.co/Dejavuvvw/1st_solution_UCCEEP_ICDAR2025)
 
 ## 📰 News 
-- [2025-06-06] We release our code.
+- [2025-06-09] We release our code and huggingface model and dataset.
 - [2025-04-18] We win the competition.
 
 ## 📦 To be released
-- HuggingFace link for our model and data.
 - arXiv paper for our solution.
 
 ## 📋 Overview
@@ -51,62 +50,28 @@ We use [ms-swift-3.2.0](https://github.com/modelscope/ms-swift/tree/v3.2.0) to t
 Use our [swift](./swift) to replace `ms-swift/swift`.
 
 ```bash
-NODE_RANK=0
-MASTER_ADDR="0.0.0.0"
-MASTER_PORT=8999
-SWIFT_CLI="xxx/python3.10/site-packages/swift/cli"
-
-which torchrun
-torchrun \
-    --nproc_per_node 8 \
-    --nnodes="${NNODES}" \
-    --node_rank="${NODE_RANK}" \
-    --master_addr="${MASTER_ADDR}" \
-    --master_port="${MASTER_PORT}" \
-    $xxx
-
-
+bash scripts/train.sh
 ```
 
-2. run inference.sh. One A800-80G is enough to run.
+And our data with ocr is in [link](https://huggingface.co/Dejavuvvw/1st_solution_UCCEEP_ICDAR2025/tree/main).
+
+### Test
+run inference.sh. One A800-80G is enough to run.
 
 ```bash
-cd /app
-bash inference.sh
+bash scripts/inference.sh
 ```
 
-you should change the model dir
-
-```bash
-# 80G
-MODEL='YOUR MODEL'
-VAL_DATA='/app/TestA_promptNew.jsonl'
-CUDA_VISIBLE_DEVICES=0 \
-MAX_PIXELS=802816 \
-swift infer \
-    --model $MODEL \
-    --infer_backend pt \
-    --stream false \
-    --temperature 0.01 \
-    --top_k 1 \
-    --top_p 0.001 \
-    --max_new_tokens 50000 \
-    --val_dataset $VAL_DATA \
-    --remove_unused_columns false \
-    --attn_impl flash_attn \
-    --max_batch_size 1
-```
-
-3. the output is saved in your model dir
+### Convert result
+the output is saved in your model dir.
 
 ```python
 python convert2final_json.py <your_pred_save_path> <save_json_name>
 ```
 
+Our prediction results on TestB is [pred.json](./pred.json)
+
+
 ## 📚 Citation
 
 If you find our paper and code useful for your research and applications, please cite using this BibTeX:
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
